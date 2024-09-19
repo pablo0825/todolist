@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-TW" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-compatible" content="IE=edge">
+        <meta name=”viewport” content=”width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+        <title>育嘉的代辦事項</title>
+        <link rel="stylesheet" href="./dist/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script type="module" src="js/index.js" async></script>
+    </head>
+    <body>
+        <main>
+            <div class="grid">
+                <div class="user">
+                    <h2><p>Pablo0825</p></h2>
+                </div>
+                <div class="grid_topbox">
+                    <div class="filter">
+                        <div class="filter_box">
+                            <button class="checkbox" id="finish-item" aria-checked="true"></button>
+                            <p>完成</p>
+                        </div>
+                        <div class="filter_box">
+                            <button class="checkbox" id="30-delete-item" aria-checked="false"></button>
+                            <p>30天刪除</p>
+                        </div>
+                        <div class="filter_box">
+                            <button class="checkbox" id="archive-project" aria-checked="false"></button>
+                            <p>封存專案</p>
+                        </div>
+                    </div>
+                    <button class="btn btn_addproject" id="btn-addproject"><i class="fa-solid fa-plus"></i></button>
+                </div>
+                <div class="grid_downbox">
+                    <div class="project">
+                        <div class="project_topbox">
+                            <button class="btn btn_dropdown" id="btn-dropdown"><i class="fa-solid fa-play"></i></button>
+                            <div class="project_titlebox">
+                                <input class="enter enter_projecttitle" type="text" name="title"  placeholder="專案列表">
+                                <button class="btn btn_seal" id="btn-seal"><i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+                            </div>
+                        </div>
+                        <div class="project_downbox">
+                            <div class="item">
+                                <button class="checkbox checkbox-average" aria-checked="false" id="checked"></i></button>
+                                <div class="item_enterbox">
+                                    <input class="enter enter_itemtitle" type="text" name="itemtitle"  placeholder="標題">
+                                    <input class="enter enter_itemremark" type="text" name="itemremark"  placeholder="備註">
+                                    <div class="item_btnbox">
+                                        <button class="btn btn_priority urgent">急</button>
+                                        <button class="btn btn_priority average">普通</button>
+                                        <button class="btn btn_priority taketourtime">慢慢來</button>
+                                    </div>
+                                </div>
+                                <button class="btn btn_delete"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+
+                        </div>
+                        <button class="btn btn_add" id="btn-add"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div id="user-list">
+            
+        </div>
+    </body>
+</html>

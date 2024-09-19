@@ -1,0 +1,22 @@
+@use '../util' as u;
+
+.filter {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    
+    justify-content: space-between;
+
+    gap: u.rem(16);
+    padding: u.rem(12) u.rem(24);
+
+    background-color: var(--itembg);
+    border-radius: u.rem(8);
+
+    &_box {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: u.rem(8);
+    }
+}

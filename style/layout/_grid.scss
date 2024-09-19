@@ -1,0 +1,36 @@
+@use '../util' as u;
+
+.grid {
+    display: flex;
+    flex-direction: column;
+    //align-items: center;
+    justify-content: center;
+    gap: u.rem(24);
+    width: min(100% - u.rem(40), u.rem(600));
+    margin-inline: auto;
+    margin-top: u.rem(48);
+
+    &_topbox {
+        display: flex;
+        //flex-direction: row;
+        gap: u.rem(16);
+        //padding: u.rem(20) u.rem(24);
+        margin-bottom: u.rem(16);
+   
+        //background-color: var(--itembg);
+        //border: 1px solid rgb(222, 222, 222, 0.2);
+        //box-shadow: f.rem(1) f.rem(1) f.rem(12) f.rem(2) rgba(147, 147, 147, 0.1);
+
+        border-radius: u.rem(8);
+    }
+
+    &_downbox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: u.rem(48);
+        min-width: u.rem(400);
+        margin-bottom: u.rem(48);
+        //border: 2px solid black;
+    }
+}

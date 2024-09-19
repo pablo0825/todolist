@@ -1,0 +1,79 @@
+@use '_functions' as f;
+
+.checkbox {
+    position: relative;
+    width: f.rem(20); 
+    height: f.rem(20); 
+
+    background: none;
+    border: f.rem(2.5) solid var(--default); 
+    border-radius: f.rem(4);
+
+    position: relative;
+
+    color: var(--textHover);
+    font-size: f.rem(20);
+
+    cursor: pointer;
+
+    &[aria-checked="true"] {
+        background-color: var(--default);
+
+        &::after {
+            content: "\2713";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            color: var(--textHover);
+            font-size: f.rem(12);
+            font-weight: bold;
+
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+.checkbox:hover {
+    animation: yRise .3s ease-in-out;
+}
+
+.checkbox-urgent {
+    top: f.rem(5);
+    border: f.rem(2.5) solid var(--urgent); 
+
+    &[aria-checked="true"] {
+        background-color: var(--urgent);
+    }
+}
+
+.checkbox-average {
+    top: f.rem(5);
+    border: f.rem(2.5) solid var(--average); 
+
+    &[aria-checked="true"] {
+        background-color: var(--average);
+    }
+}
+
+.checkbox-taketourtime {
+    top: f.rem(5);
+    border: f.rem(2.5) solid var(--taketourtime); 
+
+    &[aria-checked="true"] {
+        background-color: var(--taketourtime);
+    }
+}
+
+
+@keyframes yRise {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(f.rem(-4));
+    }
+    100% {
+      transform: translateY(0);
+    }
+}

@@ -260,7 +260,7 @@ a, a:visited, a:active {
   flex-direction: column;
   width: 100%;
   gap: 1.5rem;
-  padding: 1.25rem 1.25rem;
+  padding: 1.25rem 1.125rem;
   background-color: var(--projectbg);
   border-radius: 0.5rem;
 }

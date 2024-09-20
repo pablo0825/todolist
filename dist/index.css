@@ -165,7 +165,10 @@
 
 /*
 .enter:focus {
-    //border-bottom: 1px solid var(--remark); /* 聚焦時顯示下底線 *//*# sourceMappingURL=index.css.map */ont-size: 100%;
+    //border-bottom: 1px solid var(--remark); /* 聚焦時顯示下底線 */
+html {
+  box-sizing: border-box;
+  font-size: 100%;
 }
 
 * {
@@ -209,7 +212,7 @@ a, a:visited, a:active {
   --btn-normal:rgb(0, 208, 255);
   --btn-preseef:#00e2b5;
   --btn-hover:rgb(0, 86, 105);
-}/*# sourceMappingURL=index.css.map */r(--projectbg);
+}/*# sourceMappingURL=index.css.map */ar(--projectbg);
   border-radius: 0.5rem;
 }
 .project_topbox {

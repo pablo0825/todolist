@@ -26,6 +26,10 @@
         color: var(--textHover);
     }
 
+    &_itemtitle-locking {
+        color: var(--textLocking);
+    }
+
     &_itemtitle-true {
         color: var(--textLocking);
         text-decoration: line-through;
@@ -36,7 +40,7 @@
         padding-bottom: f.rem(4);
         font-size: f.rem(14);
         border-bottom: f.rem(1) solid var(--remark);
-        opacity: 0;
+        opacity: 1;
     }
 
     &_itemremark-open {
@@ -45,6 +49,7 @@
     }
 
 }
+
 
 /*
 .enter:focus {

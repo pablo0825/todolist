@@ -53,6 +53,13 @@
   background-color: var(--taketourtime);
 }
 
+.locking {
+  border: 0.15625rem solid var(--locking);
+}
+.locking[aria-checked=true] {
+  background-color: var(--locking);
+}
+
 @keyframes yRise {
   0% {
     transform: translateY(0);
@@ -125,7 +132,7 @@
   background-color: var(--taketourtime);
 }
 
-.locking {
+.btn-locking {
   color: rgb(161, 161, 161);
   background-color: #383A3F;
 }
@@ -147,6 +154,9 @@
   font-size: 1.25rem;
   color: var(--textHover);
 }
+.enter_itemtitle-locking {
+  color: var(--textLocking);
+}
 .enter_itemtitle-true {
   color: var(--textLocking);
   text-decoration: line-through;
@@ -156,7 +166,7 @@
   padding-bottom: 0.25rem;
   font-size: 0.875rem;
   border-bottom: 0.0625rem solid var(--remark);
-  opacity: 0;
+  opacity: 1;
 }
 .enter_itemremark-open {
   display: flex;
@@ -285,7 +295,7 @@ a, a:visited, a:active {
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
-  height: 3.675rem;
+  height: 7.975rem;
   padding: 0.875rem 0.875rem 1rem 0.875rem;
   background: var(--itembg);
   border-radius: 0.5rem;
@@ -302,7 +312,7 @@ a, a:visited, a:active {
   padding-top: 0.5rem;
   display: flex;
   gap: 0.75rem;
-  opacity: 0;
+  opacity: 1;
 }
 .item_btnbox-open {
   display: flex;

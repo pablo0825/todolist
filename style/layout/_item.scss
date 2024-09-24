@@ -4,7 +4,7 @@
     display: flex;
     align-items: flex-start;
     gap: u.rem(12);
-    height: u.rem(58.8);
+    height: u.rem(127.6);
     padding: u.rem(14) u.rem(14) u.rem(16) u.rem(14);
     background: var(--itembg);
     border-radius: u.rem(8);
@@ -22,7 +22,7 @@
         padding-top: u.rem(8);
         display: flex;
         gap: u.rem(12);
-        opacity: 0;
+        opacity: 1;
     }
 
     &_btnbox-open {

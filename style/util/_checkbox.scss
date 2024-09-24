@@ -65,6 +65,13 @@
     }
 }
 
+.locking {
+    border: f.rem(2.5) solid var(--locking); 
+
+    &[aria-checked="true"] {
+        background-color: var(--locking);
+    }
+}
 
 @keyframes yRise {
     0% {

@@ -46,7 +46,7 @@ export function newItemDom(itemTitle, itemRemark, priority, checked,) {
     const uniqueId = generateUniqueId('item');
     newItem.id = uniqueId;
 
-    const checkbox = createTagAndClass('button', null, null, 'checkbox', `btn_checkbox-${priority}`);
+    const checkbox = createTagAndClass('button', null, null, 'checkbox', `checkbox-${priority}`);
     checkbox.setAttribute('aria-checked', checked ? 'true' : 'false');
 
     const enterbox = createTagAndClass('div', null, null, 'item_enterbox');

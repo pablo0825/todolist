@@ -15,6 +15,7 @@ export function handleNewProject() {
     const newProject = {
         id: generateUniqueId('project'),
         title: null,
+        inert: false,
         items: [ {id: 'item-1', title: '項目 1', remark: '備註 1', checked: false, priority: 'average' }]
     };
     
@@ -43,6 +44,7 @@ export function handleTitleUpdates(e) {
 }
 
 export function handleProjectInert(e) {
+
     const project = e.closest('.project');
     if (!project) return;
 
@@ -52,10 +54,13 @@ export function handleProjectInert(e) {
     const item = project.querySelector('.item');
 
     const projectId = project.getAttribute('id');
+
     if (!projectId) {
         console.error('Project ID not found');
         return;
     }
+
+    const projectData = projectList.find(p => p.id === projectId); 
 
     let projectInert = projectInertMap.get(projectId) ?? true;
 
@@ -77,10 +82,22 @@ export function handleProjectInert(e) {
         onLocking(projectBtnAdd, itemChecked, itemTitle, itemBtnUrgent, itemBtnAverage, itemBtnTaketourtime, true);
         projectInertMap.set(projectId, false);
 
+        if (projectData) {
+            projectData.inert = true;
+        }
+
+        //project.style.display = 'none'; 
+
     } else {
         isInert(projectTitle, projectDownbox, projectBtnAdd, null, null, false);
         onLocking(projectBtnAdd, itemChecked, itemTitle, itemBtnUrgent, itemBtnAverage, itemBtnTaketourtime, false);
         projectInertMap.set(projectId, true);
+
+        if (projectData) {
+            projectData.inert = false; 
+        }
+
+        //project.style.display = 'flex';
     }
 
     console.log(`Project ${projectId} inert state:`, projectInertMap.get(projectId));

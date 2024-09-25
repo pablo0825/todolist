@@ -2,7 +2,7 @@
 import { generateUniqueId } from '../tools/uniqueId.js';
 import { createTagAndClass } from '../tools/createDomFramework.js';
 
-export function newProjectDom(projectTitle) {
+export function newProjectDom(projectTitle, projectInert) {
 
     const newProject = createTagAndClass('div', null, null, 'project');
     
@@ -35,11 +35,23 @@ export function newProjectDom(projectTitle) {
     titlebox.appendChild(enterProjectTitle);
     titlebox.appendChild(seal);
 
+    if (projectInert) {
+        if(enterProjectTitle) enterProjectTitle.setAttribute('inert', '');
+        if(downBox) downBox.setAttribute('inert', '');
+        if(add) add.setAttribute('inert', '');
+        if(add) add.classList.add('btn-locking');
+    } else {
+        if(enterProjectTitle) enterProjectTitle.removeAttribute('inert');
+        if(downBox) downBox.removeAttribute('inert');
+        if(add) add.removeAttribute('inert');
+        if(add) add.classList.remove('btn-locking');
+    }
+
     return newProject;
 }
 
 
-export function newItemDom(itemTitle, itemRemark, priority, checked,) {
+export function newItemDom(itemTitle, itemRemark, priority, checked, projectInert) {
 
     const newItem = createTagAndClass('div', null, null, 'item');
 
@@ -78,6 +90,27 @@ export function newItemDom(itemTitle, itemRemark, priority, checked,) {
     btnbox.appendChild(urgent);
     btnbox.appendChild(average);
     btnbox.appendChild(taketourtime);
+
+    if (projectInert) {
+        if (enterItemRemark) enterItemRemark.setAttribute('inert', '');
+        if (btnbox) btnbox.setAttribute('inert', '');
+
+        if(checkbox) checkbox.classList.add('locking');
+        if(enterItemTitle) enterItemTitle.classList.add('enter_itemtitle-locking');
+        if(urgent) urgent.classList.add('btn-locking');
+        if(average) average.classList.add('btn-locking');
+        if(taketourtime) taketourtime.classList.add('btn-locking');
+
+    } else {
+        if (enterItemRemark) enterItemRemark.removeAttribute('inert');
+        if (btnbox) btnbox.removeAttribute('inert');
+
+        if(checkbox) checkbox.classList.remove('locking');
+        if(enterItemTitle) enterItemTitle.classList.remove('enter_itemtitle-locking');
+        if(urgent) urgent.classList.remove('btn-locking');
+        if(average) average.classList.remove('btn-locking');
+        if(taketourtime) taketourtime.classList.remove('btn-locking');
+    }
 
     return newItem;
 }

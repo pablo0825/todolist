@@ -7,13 +7,13 @@ export function renderProjects() {
     gridDownbox.innerHTML = ''; // 清空現有內容
 
     projectList.forEach(project => {
-        const projectDom = newProjectDom(project.title, project.id);
+        const projectDom = newProjectDom(project.title, project.inert);
         projectDom.id = project.id;
 
         const downBox = projectDom.querySelector('.project_downbox');
 
         project.items.forEach(item => {
-            const itemDom = newItemDom(item.title, item.remark, item.priority, item.checked);
+            const itemDom = newItemDom(item.title, item.remark, item.priority, item.checked, project.inert);
             itemDom.id = item.id;
             downBox.appendChild(itemDom);
         });

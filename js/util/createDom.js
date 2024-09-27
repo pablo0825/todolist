@@ -38,13 +38,19 @@ export function newProjectDom(projectTitle, projectInert) {
     if (projectInert) {
         if(enterProjectTitle) enterProjectTitle.setAttribute('inert', '');
         if(downBox) downBox.setAttribute('inert', '');
-        if(add) add.setAttribute('inert', '');
-        if(add) add.classList.add('btn-locking');
+
+        if(add) {
+            add.setAttribute('inert', '');
+            add.classList.add('btn-locking');
+        }
     } else {
         if(enterProjectTitle) enterProjectTitle.removeAttribute('inert');
         if(downBox) downBox.removeAttribute('inert');
-        if(add) add.removeAttribute('inert');
-        if(add) add.classList.remove('btn-locking');
+
+        if (add) {
+            add.removeAttribute('inert');
+            add.classList.remove('btn-locking');
+        }
     }
 
     return newProject;
@@ -68,12 +74,15 @@ export function newItemDom(itemTitle, itemRemark, priority, checked, projectIner
     const enterItemTitle = createTagAndClass('input', itemTitle, null, 'enter', 'enter_itemtitle');
     enterItemTitle.type = 'text';
     enterItemTitle.placeholder = '標題';
+    enterItemTitle.value = itemTitle;
 
     const enterItemRemark = createTagAndClass('input', itemRemark, null, 'enter', 'enter_itemremark');
     enterItemRemark.type = 'text';
     enterItemRemark.placeholder = '備註';
+    enterItemRemark.value = itemRemark;
 
     const btnbox = createTagAndClass('div', null, null, 'item_btnbox');
+    btnbox.setAttribute('inert', '');
 
     const urgent = createTagAndClass('button', '急', null, 'btn', 'btn_priority', 'urgent');
     const average = createTagAndClass('button', '普通', null, 'btn', 'btn_priority', 'average');
@@ -92,8 +101,6 @@ export function newItemDom(itemTitle, itemRemark, priority, checked, projectIner
     btnbox.appendChild(taketourtime);
 
     if (projectInert) {
-        if (enterItemRemark) enterItemRemark.setAttribute('inert', '');
-        if (btnbox) btnbox.setAttribute('inert', '');
 
         if(checkbox) checkbox.classList.add('locking');
         if(enterItemTitle) enterItemTitle.classList.add('enter_itemtitle-locking');
@@ -102,9 +109,6 @@ export function newItemDom(itemTitle, itemRemark, priority, checked, projectIner
         if(taketourtime) taketourtime.classList.add('btn-locking');
 
     } else {
-        if (enterItemRemark) enterItemRemark.removeAttribute('inert');
-        if (btnbox) btnbox.removeAttribute('inert');
-
         if(checkbox) checkbox.classList.remove('locking');
         if(enterItemTitle) enterItemTitle.classList.remove('enter_itemtitle-locking');
         if(urgent) urgent.classList.remove('btn-locking');

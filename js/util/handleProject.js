@@ -3,7 +3,6 @@ import { projectList } from '../globals/dataStructure.js';
 import { projectInertMap } from '../globals/variables.js';
 import { getClassOfTag } from '../globals/getClass.js';
 
-
 import { generateUniqueId } from '../tools/uniqueId.js';
 import { isValidInput } from '../tools/validInput.js';
 import { isInert, onLocking } from '../tools/isInert.js';

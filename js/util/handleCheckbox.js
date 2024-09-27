@@ -1,5 +1,6 @@
 
 import { projectList, projectFilterList } from '../globals/dataStructure.js';
+import { handleItemUnfold } from '../tools/handleItemUnfold.js';
 
 
 export function toggleItemCheckbox(checkbox) {
@@ -12,6 +13,8 @@ export function toggleItemCheckbox(checkbox) {
 
     const isChecked = checkbox.getAttribute('aria-checked') === 'true';
     checkbox.setAttribute('aria-checked', !isChecked ? 'true' : 'false');
+
+    handleItemUnfold(item, !isChecked);
 
     const projectData = projectList.find(p => p.id === projectId);
 

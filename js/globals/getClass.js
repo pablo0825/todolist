@@ -14,3 +14,21 @@ export function getClassOfTag(item) {
         deleteBtn: item.querySelector('.btn.btn_delete')
     };
 }
+
+export function toggleItemState(item, remark, btnBox, isUnfold) {
+    if (isUnfold) {
+        item.classList.add('item_Unfold');
+        remark.classList.add('enter_itemtitle-Unfold');
+        btnBox.classList.add('item_btnbox-Unfol');
+
+        remark.removeAttribute('inert');
+        btnBox.removeAttribute('inert');
+    } else {
+        item.classList.remove('item_Unfold');
+        remark.classList.remove('enter_itemtitle-Unfold');
+        btnBox.classList.remove('item_btnbox-Unfol');
+
+        remark.setAttribute('inert', '');
+        btnBox.setAttribute('inert', '');
+    }
+}

@@ -7,14 +7,12 @@ export const addproject = document.getElementById('btn-addproject');
 
 export const projectInertMap = new Map();
 
-/*
-let projecIstInert = true;
+let openItem = null; // 變數可變
 
-export function getProjectInert() {
-    return projecIstInert;
+export function getOpenItem() {
+    return openItem;
 }
 
-export function setProjectInert(value) {
-    projecIstInert = value;
+export function setOpenItem(item) {
+    openItem = item;
 }
-*/

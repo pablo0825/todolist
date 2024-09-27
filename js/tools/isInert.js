@@ -13,7 +13,7 @@ export function isInert(projecTitle, downbox, btnAdd, itemRemark,  itemBtnBox, i
 
         if (projecTitle) projecTitle.removeAttribute('inert');
         if (downbox) downbox.removeAttribute('inert');
-        if (btnAdd) downbox.removeAttribute('inert');
+        if (btnAdd) btnAdd.removeAttribute('inert');
 
         if (itemRemark) itemRemark.removeAttribute('inert');
         if (itemBtnBox) itemBtnBox.removeAttribute('inert');

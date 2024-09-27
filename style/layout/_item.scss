@@ -4,7 +4,7 @@
     display: flex;
     align-items: flex-start;
     gap: u.rem(12);
-    height: u.rem(127.6);
+    height: u.rem(58.8);
     padding: u.rem(14) u.rem(14) u.rem(16) u.rem(14);
     background: var(--itembg);
     border-radius: u.rem(8);
@@ -22,13 +22,17 @@
         padding-top: u.rem(8);
         display: flex;
         gap: u.rem(12);
-        opacity: 1;
+        opacity: 0;
     }
 
-    &_btnbox-open {
+    &_btnbox-unfold {
         display: flex;
         opacity: 1;
     }
+}
+
+.item_unfold {
+    height: u.rem(127.6);
 }
 
 //f.rem(127.6)

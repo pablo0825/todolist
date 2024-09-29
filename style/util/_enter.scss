@@ -1,61 +1,55 @@
-@use '_functions' as f;
+@use "_functions" as f;
 
 .enter {
-    display: flex;
-    width: 100%;
+  display: flex;
+  width: 100%;
 
-    background: none;
-    border: none;
-    outline: none;
+  background: none;
+  border: none;
+  outline: none;
 
-    color: var(--text);
+  color: var(--text);
 
-    &_projecttitle {
-        flex-grow: 1;
-        font-weight: bold;
-        //padding-bottom: f.rem(-8);
+  &_projecttitle {
+    flex-grow: 1;
+    font-weight: bold;
+    //padding-bottom: f.rem(-8);
 
-        //border-bottom: 1px solid transparent; /* 初始狀態，隱藏下底線 */
-        //transition: border-color 0.3s ease;
+    //border-bottom: 1px solid transparent; /* 初始狀態，隱藏下底線 */
+    //transition: border-color 0.3s ease;
 
-        font-size: f.rem(24);
-    }
+    font-size: f.rem(24);
+  }
 
-    &_itemtitle {
-        font-size: f.rem(20);
-        color: var(--textHover);
-    }
+  &_itemtitle {
+    font-size: f.rem(20);
+    color: var(--textHover);
+  }
 
-    &_itemtitle-locking {
-        color: var(--textLocking);
-    }
+  &_itemtitle-locking {
+    color: var(--textLocking);
+  }
 
-    &_itemtitle-true {
-        color: var(--textLocking);
-        text-decoration: line-through;
-        text-decoration-color: var(--textLocking);
-    }
-
-    &_itemremark {
-        padding-bottom: f.rem(4);
-        font-size: f.rem(14);
-        border-bottom: f.rem(1) solid var(--remark);
-        opacity: 0;
-    }
-
-    &_itemremark-unfold {
-        display: flex;
-        opacity: 1;
-    }
-
+  &_itemremark {
+    padding-bottom: f.rem(4);
+    font-size: f.rem(14);
+    border-bottom: f.rem(1) solid var(--remark);
+    opacity: 0;
+  }
 }
 
+.unfold {
+  opacity: 1;
+}
+
+.strikethrough {
+  color: var(--textLocking);
+  text-decoration: line-through;
+  text-decoration-color: var(--textLocking);
+}
 
 /*
 .enter:focus {
     //border-bottom: 1px solid var(--remark); /* 聚焦時顯示下底線 */
-
-
-
 
 //    color: var(--textHover);

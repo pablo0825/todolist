@@ -1,44 +1,57 @@
+import { projectList, projectFilterList } from "../globals/dataStructure.js";
+import { getOpenItem, setOpenItem } from "../globals/variables.js";
+import { getClassOfTag, toggleItemState } from "../globals/getClass.js";
 
-import { projectList, projectFilterList } from '../globals/dataStructure.js';
-import { handleItemUnfold } from '../tools/handleItemUnfold.js';
-
+import { handleItemUnfold } from "../tools/handleItemUnfold.js";
+import { getProjectAndItem } from "../tools/getProjectAndItem.js";
+import { handleItemReorder } from "../tools/handleItemReorder.js";
 
 export function toggleItemCheckbox(checkbox) {
+  const downBox = checkbox.closest(".project_downbox");
 
-    const project = checkbox.closest('.project');
-    const item = project.querySelector('.item');
+  const elements = getProjectAndItem(checkbox);
+  if (!elements) return;
 
-    const projectId = project.getAttribute('id');
-    const itemtId = item.getAttribute('id');
+  const { projectId, item, itemID } = elements;
 
-    const isChecked = checkbox.getAttribute('aria-checked') === 'true';
-    checkbox.setAttribute('aria-checked', !isChecked ? 'true' : 'false');
+  const isChecked = checkbox.getAttribute("aria-checked") === "true";
+  checkbox.setAttribute("aria-checked", !isChecked ? "true" : "false");
 
+  if (!isChecked) {
     handleItemUnfold(item, !isChecked);
+    setOpenItem(null);
 
-    const projectData = projectList.find(p => p.id === projectId);
+    setTimeout(() => {
+      handleItemReorder(downBox); // 延遲0.3秒執行重新排序
+    }, 300);
+  }
 
-    if (projectData) {
-        const itemData = projectData.items.find(i => i.id === itemtId);
+  const projectData = projectList.find((p) => p.id === projectId);
 
-        if (itemData) {
-            itemData.checked = !isChecked;  // 更新資料結構中的狀態
-        }
+  if (projectData) {
+    const itemIndex = projectData.items.findIndex((i) => i.id === itemID);
+
+    if (itemIndex !== -1) {
+      projectData.items[itemIndex].checked = !isChecked;
     }
+    console.log(projectData.items[itemIndex].checked);
+  }
 }
 
 export function toggleProjectCheckbox(checkbox) {
+  const filterCheckboxId = checkbox.getAttribute("id");
 
-    const filterCheckboxId = checkbox.getAttribute('id');
+  const isChecked = checkbox.getAttribute("aria-checked") === "true";
+  checkbox.setAttribute("aria-checked", !isChecked ? "true" : "false");
 
-    const isChecked = checkbox.getAttribute('aria-checked') === 'true';
-    checkbox.setAttribute('aria-checked', !isChecked ? 'true' : 'false');
+  const filterCheckboxData = projectFilterList.find(
+    (p) => p.id === filterCheckboxId
+  );
 
-    const filterCheckboxData = projectFilterList.find(p => p.id === filterCheckboxId);
-
-    if (filterCheckboxData && ["finish-item", "delete-item", "archive-project"].includes(filterCheckboxId)) {
-        filterCheckboxData.checked = !isChecked;
-
-    }
+  if (
+    filterCheckboxData &&
+    ["finish-item", "delete-item", "archive-project"].includes(filterCheckboxId)
+  ) {
+    filterCheckboxData.checked = !isChecked;
+  }
 }
-

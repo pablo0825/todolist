@@ -1,105 +1,156 @@
+import { projectList } from "../globals/dataStructure.js";
+import { projectInertMap } from "../globals/variables.js";
+import { getClassOfTag } from "../globals/getClass.js";
 
-import { projectList } from '../globals/dataStructure.js';
-import { projectInertMap } from '../globals/variables.js';
-import { getClassOfTag } from '../globals/getClass.js';
+import { generateUniqueId } from "../tools/uniqueId.js";
+import { isValidInput } from "../tools/validInput.js";
+import { isInert, onLocking } from "../tools/isInert.js";
 
-import { generateUniqueId } from '../tools/uniqueId.js';
-import { isValidInput } from '../tools/validInput.js';
-import { isInert, onLocking } from '../tools/isInert.js';
-
-import { renderProjects } from './render.js';
-
+import { renderProjects } from "./render.js";
 
 export function handleNewProject() {
-    const newProject = {
-        id: generateUniqueId('project'),
-        title: null,
-        inert: false,
-        items: [ {id: 'item-1', title: '項目 1', remark: '備註 1', checked: false, priority: 'average' }]
-    };
-    
-    projectList.push(newProject); // 更新數據    
-    renderProjects(); // 渲染新的專案列表
+  const newProject = {
+    id: generateUniqueId("project"),
+    title: null,
+    inert: false,
+    items: [
+      {
+        id: "item-1",
+        title: "項目 1",
+        remark: "備註 1",
+        checked: false,
+        priority: "average",
+      },
+    ],
+  };
 
-    console.log(projectList);
+  projectList.push(newProject); // 更新數據
+  renderProjects(); // 渲染新的專案列表
+
+  console.log(projectList);
 }
 
-
 export function handleTitleUpdates(e) {
+  const project = e.closest(".project");
+  const enterValue = e.value.trim();
 
-    const project = e.closest('.project'); 
-    const enterValue = e.value.trim(); 
+  if (!isValidInput(enterValue)) return;
 
-    if (!isValidInput(enterValue)) return;
+  const projectId = project.id;
+  const projectData = projectList.find((p) => p.id === projectId);
 
-    const projectId = project.id; 
-    const projectData = projectList.find(p => p.id === projectId); 
+  if (projectData) {
+    projectData.title = enterValue;
+  }
 
-    if (projectData) {
-        projectData.title = enterValue; 
-    }
-
-    console.log(projectList);
+  console.log(projectList);
 }
 
 export function handleProjectInert(e) {
+  const project = e.closest(".project");
+  if (!project) return;
 
-    const project = e.closest('.project');
-    if (!project) return;
+  const projectTitle = project.querySelector(".enter.enter_projecttitle");
+  const projectDownbox = project.querySelector(".project_downbox");
+  const projectBtnAdd = project.querySelector(".btn.btn_add");
+  const items = project.querySelectorAll(".item"); // 使用 querySelectorAll 遍歷所有 item
 
-    const projectTitle = project.querySelector('.enter.enter_projecttitle');
-    const projectDownbox = project.querySelector('.project_downbox');
-    const projectBtnAdd = project.querySelector('.btn.btn_add');
-    const item = project.querySelector('.item');
+  const projectId = project.getAttribute("id");
 
-    const projectId = project.getAttribute('id');
+  if (!projectId) {
+    console.error("Project ID not found");
+    return;
+  }
 
-    if (!projectId) {
-        console.error('Project ID not found');
-        return;
-    }
+  const projectData = projectList.find((p) => p.id === projectId);
 
-    const projectData = projectList.find(p => p.id === projectId); 
+  let projectInert = projectInertMap.get(projectId) ?? true;
 
-    let projectInert = projectInertMap.get(projectId) ?? true;
+  if (projectInert) {
+    isInert(projectTitle, projectDownbox, projectBtnAdd, null, null, true);
 
-    const {
+    items.forEach((item) => {
+      // 在每個 item 中查找內部元素
+      const {
         checkbox: itemChecked,
         title: itemTitle,
         urgent: itemBtnUrgent,
         average: itemBtnAverage,
-        taketourtime: itemBtnTaketourtime
-    } = getClassOfTag(item);
+        taketourtime: itemBtnTaketourtime,
+      } = getClassOfTag(item);
 
-    if (!itemChecked || !itemTitle || !itemBtnUrgent || !itemBtnAverage || !itemBtnTaketourtime) {
-        console.error('One or more required DOM elements were not found');
+      if (
+        !itemChecked ||
+        !itemTitle ||
+        !itemBtnUrgent ||
+        !itemBtnAverage ||
+        !itemBtnTaketourtime
+      ) {
+        console.error("One or more required DOM elements were not found");
         return;
+      }
+
+      onLocking(
+        projectBtnAdd,
+        itemChecked,
+        itemTitle,
+        itemBtnUrgent,
+        itemBtnAverage,
+        itemBtnTaketourtime,
+        true
+      );
+    });
+    projectInertMap.set(projectId, false);
+
+    if (projectData) {
+      projectData.inert = true;
     }
 
-    if (projectInert) {
-        isInert(projectTitle, projectDownbox, projectBtnAdd, null, null, true);
-        onLocking(projectBtnAdd, itemChecked, itemTitle, itemBtnUrgent, itemBtnAverage, itemBtnTaketourtime, true);
-        projectInertMap.set(projectId, false);
+    //project.style.display = 'none';
+  } else {
+    isInert(projectTitle, projectDownbox, projectBtnAdd, null, null, false);
 
-        if (projectData) {
-            projectData.inert = true;
-        }
+    items.forEach((item) => {
+      const {
+        checkbox: itemChecked,
+        title: itemTitle,
+        urgent: itemBtnUrgent,
+        average: itemBtnAverage,
+        taketourtime: itemBtnTaketourtime,
+      } = getClassOfTag(item);
 
-        //project.style.display = 'none'; 
+      if (
+        !itemChecked ||
+        !itemTitle ||
+        !itemBtnUrgent ||
+        !itemBtnAverage ||
+        !itemBtnTaketourtime
+      ) {
+        console.error("One or more required DOM elements were not found");
+        return;
+      }
 
-    } else {
-        isInert(projectTitle, projectDownbox, projectBtnAdd, null, null, false);
-        onLocking(projectBtnAdd, itemChecked, itemTitle, itemBtnUrgent, itemBtnAverage, itemBtnTaketourtime, false);
-        projectInertMap.set(projectId, true);
+      onLocking(
+        projectBtnAdd,
+        itemChecked,
+        itemTitle,
+        itemBtnUrgent,
+        itemBtnAverage,
+        itemBtnTaketourtime,
+        false
+      );
+    });
+    projectInertMap.set(projectId, true);
 
-        if (projectData) {
-            projectData.inert = false; 
-        }
-
-        //project.style.display = 'flex';
+    if (projectData) {
+      projectData.inert = false;
     }
 
-    console.log(`Project ${projectId} inert state:`, projectInertMap.get(projectId));
+    //project.style.display = 'flex';
+  }
+
+  console.log(
+    `Project ${projectId} inert state:`,
+    projectInertMap.get(projectId)
+  );
 }
-
-

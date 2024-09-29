@@ -157,20 +157,21 @@
 .enter_itemtitle-locking {
   color: var(--textLocking);
 }
-.enter_itemtitle-true {
-  color: var(--textLocking);
-  text-decoration: line-through;
-  text-decoration-color: var(--textLocking);
-}
 .enter_itemremark {
   padding-bottom: 0.25rem;
   font-size: 0.875rem;
   border-bottom: 0.0625rem solid var(--remark);
   opacity: 0;
 }
-.enter_itemremark-open {
-  display: flex;
+
+.unfold {
   opacity: 1;
+}
+
+.strikethrough {
+  color: var(--textLocking);
+  text-decoration: line-through;
+  text-decoration-color: var(--textLocking);
 }
 
 /*
@@ -314,7 +315,11 @@ a, a:visited, a:active {
   gap: 0.75rem;
   opacity: 0;
 }
-.item_btnbox-open {
+.item_btnbox-unfold {
   display: flex;
   opacity: 1;
+}
+
+.item_unfold {
+  height: 7.975rem;
 }/*# sourceMappingURL=style.css.map */

@@ -176,4 +176,99 @@
 
 /*
 .enter:focus {
-    //border-bottom: 1px solid var(--remark); /* 聚焦時顯示下底線 *//*# sourceMappingURL=index.css.map */
+    //border-bottom: 1px solid var(--remark); /* 聚焦時顯示下底線 *//*# sourceMappingURL=index.css.map */ction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  width: min(100% - 2.5rem, 37.5rem);
+  margin-inline: auto;
+  margin-top: 3rem;
+}
+.grid_topbox {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+}
+.grid_downbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  min-width: 25rem;
+  margin-bottom: 3rem;
+}
+
+.filter {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--itembg);
+  border-radius: 0.5rem;
+}
+.filter_box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1.5rem;
+  padding: 1.25rem 1.125rem;
+  background-color: var(--projectbg);
+  border-radius: 0.5rem;
+}
+.project_topbox {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  padding: 0 0.5rem;
+}
+.project_titlebox {
+  display: flex;
+  flex-grow: 1;
+  gap: 1rem;
+}
+.project_downbox {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  height: 3.675rem;
+  padding: 0.875rem 0.875rem 1rem 0.875rem;
+  background: var(--itembg);
+  border-radius: 0.5rem;
+  transition: 0.3s ease;
+  overflow: hidden;
+}
+.item_enterbox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+.item_btnbox {
+  padding-top: 0.5rem;
+  display: flex;
+  gap: 0.75rem;
+  opacity: 0;
+}
+.item_btnbox-unfold {
+  display: flex;
+  opacity: 1;
+}
+
+.item_unfold {
+  height: 7.975rem;
+}/*# sourceMappingURL=index.css.map */

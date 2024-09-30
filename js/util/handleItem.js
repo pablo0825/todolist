@@ -12,6 +12,9 @@ import { handleItemReorder } from "../tools/handleItemReorder.js";
 import { renderProjects } from "./render.js";
 
 export function handleNewItem(e) {
+
+  const openItem = getOpenItem();
+
   const project = e.closest(".project");
   if (!project) return;
 
@@ -34,12 +37,22 @@ export function handleNewItem(e) {
       id: generateUniqueId("itme"), // 確保每個新項目有唯一的 ID，這裡可以生成唯一 ID
       title: null,
       remark: null,
-      checked: null,
+      checked: false,
       priority: "average",
     };
 
     projectData.items.push(newItem); // 更新數據
-    renderProjects(); // 渲染新的專案列表
+
+    if (openItem) {
+      handleItemUnfold(openItem, false);
+      setOpenItem(null);
+
+      setTimeout(() => {
+        handleItemReorder(projectId); // 延遲0.3秒執行重新排序
+      }, 300);
+    } else {
+      handleItemReorder(projectId);
+    }
 
     console.log(projectData.items); // 正確輸出專案的 items 列表
   }
@@ -59,10 +72,7 @@ export function handleItemDelete(e) {
     if (itemIndex > -1) {
       projectData.items.splice(itemIndex, 1);
     }
-
     renderProjects(); // 渲染新的專案列表
-
-    console.log(projectData.items); // 正確輸出專案的 items 列表
   }
 }
 
@@ -129,8 +139,6 @@ export function handleItemBtnBox(e) {
   );
 
   if (priorityType) {
-    const downBox = e.target.closest(".project_downbox");
-
     const project = e.target.closest(".project");
     const item = e.target.closest(".item");
 
@@ -140,7 +148,7 @@ export function handleItemBtnBox(e) {
     const classObj = getClassOfTag(item);
     const { checkbox } = classObj || {};
 
-    if (downBox && item && checkbox) {
+    if (item && checkbox) {
       checkbox.classList.remove(
         "checkbox-urgent",
         "checkbox-average",
@@ -151,7 +159,7 @@ export function handleItemBtnBox(e) {
       handleItemUnfold(item, false); // 先執行展開操作
 
       setTimeout(() => {
-        handleItemReorder(downBox); // 延遲0.3秒執行重新排序
+        handleItemReorder(projectId); // 延遲0.3秒執行重新排序
       }, 300);
 
       e.stopPropagation();

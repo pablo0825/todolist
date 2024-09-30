@@ -7,7 +7,6 @@ import { getProjectAndItem } from "../tools/getProjectAndItem.js";
 import { handleItemReorder } from "../tools/handleItemReorder.js";
 
 export function toggleItemCheckbox(checkbox) {
-  const downBox = checkbox.closest(".project_downbox");
 
   const elements = getProjectAndItem(checkbox);
   if (!elements) return;
@@ -20,11 +19,11 @@ export function toggleItemCheckbox(checkbox) {
   if (!isChecked) {
     handleItemUnfold(item, !isChecked);
     setOpenItem(null);
-
-    setTimeout(() => {
-      handleItemReorder(downBox); // 延遲0.3秒執行重新排序
-    }, 300);
   }
+
+  setTimeout(() => {
+    handleItemReorder(projectId); // 延遲0.3秒執行重新排序
+  }, 300);
 
   const projectData = projectList.find((p) => p.id === projectId);
 

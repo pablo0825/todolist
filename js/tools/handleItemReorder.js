@@ -1,32 +1,22 @@
-export function handleItemReorder(downBox) {
-  const fragment = document.createDocumentFragment();
-  const items = Array.from(downBox.children);
+import { projectList } from "../globals/dataStructure.js";
 
-  const [uncheckedItems, checkedItems] = items.reduce(
-    (acc, item) => {
-      const checkbox = item.querySelector(".checkbox");
-      checkbox.getAttribute("aria-checked") === "true"
-        ? acc[1].push(item)
-        : acc[0].push(item);
-      return acc;
-    },
-    [[], []]
-  );
+import { renderProjects } from "../util/render.js";
 
-  const urgentItem = uncheckedItems.filter((item) =>
-    item.querySelector(".checkbox.checkbox-urgent")
-  );
-  const averageItem = uncheckedItems.filter((item) =>
-    item.querySelector(".checkbox.checkbox-average")
-  );
-  const taketourtimeItem = uncheckedItems.filter((item) =>
-    item.querySelector(".checkbox.checkbox-taketourtime")
-  );
+export function handleItemReorder(projectId) {
 
-  [...urgentItem, ...averageItem, ...taketourtimeItem, ...checkedItems].forEach(
-    (item) => fragment.appendChild(item)
-  );
+  const projectData = projectList.find((p) => p.id === projectId);
+  if (!projectData) return;
 
-  downBox.innerHTML = ""; // 清空原始內容
-  downBox.appendChild(fragment); // 將重新排序的元素添加回去
+  const uncheckedItems = projectData.items.filter(item => !item.checked);
+  const checkedItems = projectData.items.filter(item => item.checked);
+
+  const urgentItems = uncheckedItems.filter(item => item.priority === 'urgent');
+  const averageItems = uncheckedItems.filter(item => item.priority === 'average');
+  const taketourtimeItems = uncheckedItems.filter(item => item.priority === 'taketourtime');
+
+  const orderedItems = [...urgentItems, ...averageItems, ...taketourtimeItems, ...checkedItems];
+
+  projectData.items = orderedItems;
+
+  renderProjects();
 }

@@ -4,6 +4,8 @@ import {
   handleTitleUpdates,
   handleProjectInert,
 } from "../js/util/handleProject.js";
+import { getOpenItem, setOpenItem } from "../js/globals/variables.js";
+import { getClassOfTag, toggleItemState } from "../js/globals/getClass.js";
 
 import {
   toggleItemCheckbox,
@@ -18,7 +20,7 @@ import {
   handleItemBtnBox,
 } from "./util/handleItem.js";
 
-let debounceTimer;
+import { handleItemUnfold } from "../js/tools/handleItemUnfold.js";
 
 addproject.addEventListener("click", handleNewProject);
 
@@ -30,6 +32,19 @@ document.querySelector(".grid_topbox").addEventListener("click", (e) => {
   }
 });
 
+
+document.addEventListener('click', (e) => {
+
+  const openItem = getOpenItem();
+
+  // 如果有展開的 item 並且點擊的不是該 item 內的元素，則關閉該 item
+  if (openItem && !e.target.closest('.item')) {
+    handleItemUnfold(openItem, false);
+    setOpenItem(null);
+  }
+});
+
+
 document.querySelector(".grid_downbox").addEventListener("click", (e) => {
   const target = e.target;
 
@@ -37,15 +52,15 @@ document.querySelector(".grid_downbox").addEventListener("click", (e) => {
     handleProjectInert(target);
   }
 
-  if (target.matches(".checkbox")) {
+  if (target.closest(".checkbox")) {
     toggleItemCheckbox(target);
   }
 
-  if (target.matches(".btn.btn_add")) {
+  if (target.closest(".btn.btn_add")) {
     handleNewItem(target);
   }
 
-  if (target.matches(".btn.btn_delete")) {
+  if (target.closest(".btn.btn_delete")) {
     handleItemDelete(target);
   }
 
